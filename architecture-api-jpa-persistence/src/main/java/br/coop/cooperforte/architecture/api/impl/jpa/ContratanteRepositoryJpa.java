@@ -19,11 +19,11 @@ public class ContratanteRepositoryJpa implements ContratanteRepository {
 
     @Override
     public Contratante porCPF(CPF cpf) {
-        ContratanteEntity entidade = em.find(ContratanteEntity.class, cpf);
+        ContratanteEntity entidade = em.find(ContratanteEntity.class, cpf.toString());
         Contratante contratante = null;
         if (entidade != null) {
             contratante = new Contratante(
-                    new CPF(entidade.getCpf()),
+                    cpf,
                     entidade.getDataNascimento(),
                     entidade.getEmancipado()
             );
