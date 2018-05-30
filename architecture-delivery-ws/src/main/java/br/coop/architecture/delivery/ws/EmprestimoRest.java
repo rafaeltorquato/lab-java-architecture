@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
  * @author Rafael Torquato (Mirante Tecnologia)
  */
 @JBossLog
-@Path("/emprestimos")
+@Path("/emprestimo")
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
 @Stateless
@@ -33,7 +33,6 @@ public class EmprestimoRest {
 //    private ContratarEmprestimoEJB contratarEmprestimo;
 
     @POST
-    @Path("/contratar")
     public Response contratar(ContratarEmprestimo.Solicitacao solicitacao) throws EmprestimoException {
         ContratarEmprestimo casoUso = new ContratarEmprestimo(contratanteRepository, emprestimoRepository, MAIORIDADE_PENAL);
         try {
