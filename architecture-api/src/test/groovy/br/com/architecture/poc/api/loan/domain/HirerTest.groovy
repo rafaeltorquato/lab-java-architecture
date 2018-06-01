@@ -12,10 +12,9 @@ class HirerTest extends Specification {
         given:
         def cpf = null
         def dataNascimento = new Date()
-        def emancipado = false
 
         when:
-        new Hirer(cpf, dataNascimento, emancipado)
+        new Hirer(cpf, dataNascimento)
 
         then:
         thrown(NullPointerException.class)
@@ -25,28 +24,12 @@ class HirerTest extends Specification {
         given:
         def cpf = new SocialSecurityNumber("99198720163")
         def dataNascimento = null
-        def emancipado = false
 
         when:
-        new Hirer(cpf, dataNascimento, emancipado)
+        new Hirer(cpf, dataNascimento)
 
         then:
         thrown(NullPointerException.class)
     }
 
-    def "deve falhar ao criar Contratante com indicacao de emancipacao null"() {
-        given:
-        def cpf = new SocialSecurityNumber("99198720163")
-        def dataNascimento = new Date()
-        def emancipado = null
-
-        when:
-        new Hirer(cpf, dataNascimento, emancipado)
-
-        then:
-        thrown(NullPointerException.class)
-    }
-
-    //TODO Testar inimputabilidade
-    //TODO Testar maioridade
 }

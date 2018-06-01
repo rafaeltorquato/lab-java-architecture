@@ -25,10 +25,9 @@ public class HirerRepositoryJpa implements HirerRepository {
         if (entidade != null) {
             hirer = new Hirer(
                     socialSecurityNumber,
-                    entidade.getDataNascimento(),
-                    entidade.getEmancipado()
+                    entidade.getDataNascimento()
             );
-            hirer.setDataMorte(entidade.getDataMorte());
+            hirer.setDateOfDeath(entidade.getDataMorte());
         }
         return hirer;
     }

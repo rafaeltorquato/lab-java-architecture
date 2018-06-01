@@ -42,7 +42,7 @@ public class GetHirerLoans implements
     }
 
     private void erroSeContratanteMorto(Hirer hirer) throws LoanException {
-        if (hirer.morto())
+        if (hirer.dead())
             throw new LoanException(ErrorMessage.HIRER_IS_DEAD);
     }
 

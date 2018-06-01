@@ -33,7 +33,7 @@ public class ContratanteRepositoryMongo extends MongoTemplate implements Contrat
                     document.getDate("dataNascimento"),
                     document.getBoolean("emancipado")
             );
-            contratante.setDataMorte(document.getDate("dataMorte"));
+            contratante.setDataMorte(document.getDate("dateOfDeath"));
         }
 
         return contratante;

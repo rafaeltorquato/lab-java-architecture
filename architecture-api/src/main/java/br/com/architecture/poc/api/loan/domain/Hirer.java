@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,36 +18,21 @@ public class Hirer implements Serializable {
 
     @Getter
     private final SocialSecurityNumber socialSecurityNumber;
-    private final Date dataNascimento;
-    private final Boolean emancipado;
+    private final Date birthDate;
     @Setter
-    private Date dataMorte;
+    private Date dateOfDeath;
 
-    public Hirer(SocialSecurityNumber socialSecurityNumber, Date dataNascimento, Boolean emancipado) {
+    public Hirer(SocialSecurityNumber socialSecurityNumber, Date birthDate) {
         this.socialSecurityNumber = Objects.requireNonNull(socialSecurityNumber);
-        this.dataNascimento = Objects.requireNonNull(dataNascimento);
-        this.emancipado = Objects.requireNonNull(emancipado);
+        this.birthDate = Objects.requireNonNull(birthDate);
     }
 
-    public boolean imputavel(Integer maioridadePenal) {
-        return !morto() && (emancipado || maiorDeIdade(maioridadePenal));
+    public boolean dead() {
+        return dateOfDeath != null;
     }
 
-    public boolean morto() {
-        return dataMorte != null;
+    public Optional<Date> getDateOfDeath() {
+        return Optional.ofNullable(dateOfDeath);
     }
 
-    public Optional<Date> getDataMorte() {
-        return Optional.ofNullable(dataMorte);
-    }
-
-    private boolean maiorDeIdade(Integer maioridadePenal) {
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.YEAR, -maioridadePenal);
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        return c.getTime().after(dataNascimento);
-    }
 }

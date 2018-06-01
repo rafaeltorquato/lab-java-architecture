@@ -16,8 +16,7 @@ class LoanTest extends Specification {
         def parcelas = new LoanInstallment(10)
         def contratante = new Hirer(
                 new SocialSecurityNumber("99198720163"),
-                new Date(),
-                true
+                new Date()
         )
 
         when:
@@ -33,8 +32,7 @@ class LoanTest extends Specification {
         def parcelas = null
         def contratante = new Hirer(
                 new SocialSecurityNumber("99198720163"),
-                new Date(),
-                true
+                new Date()
         )
 
         when:

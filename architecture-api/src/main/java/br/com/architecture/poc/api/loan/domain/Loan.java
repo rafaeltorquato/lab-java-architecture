@@ -20,13 +20,13 @@ public class Loan implements Serializable {
     private final Value value;
     private final LoanInstallment loanInstallment;
     private final Hirer hirer;
-    private final Date dataContratacao;
+    private final Date contractDate;
 
     public Loan(Value value, LoanInstallment loanInstallment, Hirer hirer) {
         this.identificador = UUID.randomUUID();
         this.value = Objects.requireNonNull(value);
         this.loanInstallment = Objects.requireNonNull(loanInstallment);
         this.hirer = Objects.requireNonNull(hirer);
-        this.dataContratacao = new Date();
+        this.contractDate = new Date();
     }
 }

@@ -25,23 +25,20 @@ public class HirerRepositoryStubs implements HirerRepository {
             SimpleDateFormat ddMMyyyy = new SimpleDateFormat("ddMMyyyy");
             Hirer hirer1 = new Hirer(
                     new SocialSecurityNumber("99198720163"),
-                    ddMMyyyy.parse("07101982"),
-                    false
+                    ddMMyyyy.parse("07101982")
             );
             contratantes.put(hirer1.getSocialSecurityNumber(), hirer1);
 
             Hirer hirer2 = new Hirer(
                     new SocialSecurityNumber("99476239042"),
-                    ddMMyyyy.parse("01012000"),
-                    false
+                    ddMMyyyy.parse("01012000")
             );
-            hirer2.setDataMorte(ddMMyyyy.parse("01012018"));
+            hirer2.setDateOfDeath(ddMMyyyy.parse("01012018"));
             contratantes.put(hirer2.getSocialSecurityNumber(), hirer2);
 
             Hirer hirer3 = new Hirer(
                     new SocialSecurityNumber("66529623060"),
-                    ddMMyyyy.parse("01012005"),
-                    true
+                    ddMMyyyy.parse("01012005")
             );
             contratantes.put(hirer3.getSocialSecurityNumber(), hirer3);
         } catch (ParseException e) {
