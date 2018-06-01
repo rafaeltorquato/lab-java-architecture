@@ -4,15 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.coop.cooperforte</groupId>
     <artifactId>architecture-poc</artifactId>
+    <groupId>br.com.architecture.poc</groupId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>architecture-api</module>
-        <module>architecture-delivery-ws</module>
-        <module>architecture-delivery-socket</module>
-        <module>architecture-delivery-ftp</module>
     </modules>
 
     <properties>
@@ -68,21 +65,15 @@
 
     <profiles>
         <profile>
-            <id>jpa-persistence</id>
+            <id>javaee</id>
             <modules>
-                <module>architecture-api-jpa-persistence</module>
+                <module>architecture-javaee-impl</module>
             </modules>
         </profile>
         <profile>
-            <id>mongo-persistence</id>
+            <id>spring</id>
             <modules>
-                <module>architecture-api-mongo-persistence</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>stubs-persistence</id>
-            <modules>
-                <module>architecture-api-stubs-persistence</module>
+                <module>architecture-spring-impl</module>
             </modules>
         </profile>
     </profiles>
