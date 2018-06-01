@@ -1,14 +1,12 @@
 package br.com.architecture.poc.api.common;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.io.Serializable;
 
 /**
  * @author Rafael Torquato
  */
-@ToString(of = "naoFormatado")
 @EqualsAndHashCode(of = "naoFormatado")
 public final class CPF implements Serializable {
 
@@ -26,4 +24,8 @@ public final class CPF implements Serializable {
         return formatado;
     }
 
+    @Override
+    public String toString() {
+        return naoFormatado;
+    }
 }

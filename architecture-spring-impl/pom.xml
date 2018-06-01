@@ -11,5 +11,22 @@
     <packaging>pom</packaging>
     <artifactId>architecture-spring-impl</artifactId>
 
+    <modules>
+        <module>javaee-delivery-ws</module>
+    </modules>
 
+    <profiles>
+        <profile>
+            <id>javaee-stubs-persistence</id>
+            <modules>
+                <module>javaee-stubs-persistence</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>mongo-persistence</id>
+            <modules>
+                <module>mongo-persistence</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>

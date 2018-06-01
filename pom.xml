@@ -79,7 +79,7 @@
     </profiles>
 
     <build>
-        <finalName>architecture-delivery-ws</finalName>
+        <finalName>architecture-javaee-delivery-ws</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>

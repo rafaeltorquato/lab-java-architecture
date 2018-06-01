@@ -12,26 +12,20 @@
 
     <artifactId>architecture-javaee-impl</artifactId>
     <modules>
-        <module>delivery-ws</module>
+        <module>javaee-delivery-ws</module>
     </modules>
 
     <profiles>
         <profile>
-            <id>jpa-persistence</id>
+            <id>javaee-jpa-persistence</id>
             <modules>
-                <module>jpa-persistence</module>
+                <module>javaee-jpa-persistence</module>
             </modules>
         </profile>
         <profile>
-            <id>mongo-persistence</id>
+            <id>javaee-stubs-persistence</id>
             <modules>
-                <module>mongo-persistence</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>stubs-persistence</id>
-            <modules>
-                <module>stubs-persistence</module>
+                <module>javaee-stubs-persistence</module>
             </modules>
         </profile>
     </profiles>
