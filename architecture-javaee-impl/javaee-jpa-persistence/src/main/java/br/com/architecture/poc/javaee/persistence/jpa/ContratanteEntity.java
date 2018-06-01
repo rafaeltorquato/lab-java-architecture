@@ -16,7 +16,7 @@ import java.util.Date;
 @Entity
 public class ContratanteEntity implements Serializable {
 
-    //TODO Contrutor com Contratante
+    //TODO Contrutor com Hirer
     @Id
     private String cpf;
     private Date dataNascimento;

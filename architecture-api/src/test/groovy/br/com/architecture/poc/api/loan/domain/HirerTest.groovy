@@ -1,12 +1,12 @@
-package br.com.architecture.poc.api.domain
+package br.com.architecture.poc.api.loan.domain
 
-import br.com.architecture.poc.api.common.CPF
+import br.com.architecture.poc.api.common.SocialSecurityNumber
 import spock.lang.Specification
 
 /**
  * @author Rafael Torquato
  */
-class ContratanteTest extends Specification {
+class HirerTest extends Specification {
 
     def "deve falhar ao criar Contratante com cpf null"() {
         given:
@@ -15,7 +15,7 @@ class ContratanteTest extends Specification {
         def emancipado = false
 
         when:
-        new Contratante(cpf, dataNascimento, emancipado)
+        new Hirer(cpf, dataNascimento, emancipado)
 
         then:
         thrown(NullPointerException.class)
@@ -23,12 +23,12 @@ class ContratanteTest extends Specification {
 
     def "deve falhar ao criar Contratante com dataNascimento null"() {
         given:
-        def cpf = new CPF("99198720163")
+        def cpf = new SocialSecurityNumber("99198720163")
         def dataNascimento = null
         def emancipado = false
 
         when:
-        new Contratante(cpf, dataNascimento, emancipado)
+        new Hirer(cpf, dataNascimento, emancipado)
 
         then:
         thrown(NullPointerException.class)
@@ -36,12 +36,12 @@ class ContratanteTest extends Specification {
 
     def "deve falhar ao criar Contratante com indicacao de emancipacao null"() {
         given:
-        def cpf = new CPF("99198720163")
+        def cpf = new SocialSecurityNumber("99198720163")
         def dataNascimento = new Date()
         def emancipado = null
 
         when:
-        new Contratante(cpf, dataNascimento, emancipado)
+        new Hirer(cpf, dataNascimento, emancipado)
 
         then:
         thrown(NullPointerException.class)

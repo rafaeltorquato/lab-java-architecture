@@ -1,18 +1,18 @@
-package br.com.architecture.poc.api.domain
+package br.com.architecture.poc.api.loan.domain
 
 import spock.lang.Specification
 
 /**
  * @author Rafael Torquato
  */
-class ParcelasTest extends Specification {
+class LoanInstallmentTest extends Specification {
 
     def "deve falhar ao criar Parcelas com valor negativo"() {
         given:
         def quantidade = -1
 
         when:
-        new Parcelas(quantidade)
+        new LoanInstallment(quantidade)
 
         then:
         thrown(IllegalArgumentException.class)
@@ -23,7 +23,7 @@ class ParcelasTest extends Specification {
         def quantidade = 0
 
         when:
-        new Parcelas(quantidade)
+        new LoanInstallment(quantidade)
 
         then:
         thrown(IllegalArgumentException.class)
@@ -34,7 +34,7 @@ class ParcelasTest extends Specification {
         def quantidade = null
 
         when:
-        new Parcelas(quantidade)
+        new LoanInstallment(quantidade)
 
         then:
         thrown(NullPointerException.class)

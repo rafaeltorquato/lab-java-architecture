@@ -29,8 +29,8 @@ public class EmprestimoRepositoryMongo extends MongoTemplate implements Empresti
         Document document = new Document();
         document.put("identificador", emprestimo.getIdentificador().toString());
         document.put("valor", emprestimo.getValor().doubleValue());
-        document.put("moeda", emprestimo.getValor().moeda().toString());
-        document.put("quantidadeParcelas", emprestimo.getParcelas());
+        document.put("currency", emprestimo.getValor().moeda().toString());
+        document.put("loanInstallmentQuantity", emprestimo.getParcelas());
         document.put("cpfContratante", emprestimo.getContratante().getCpf().toString());
         document.put("dataContratacao", emprestimo.getDataContratacao());
         collection().insertOne(document);
@@ -45,8 +45,8 @@ public class EmprestimoRepositoryMongo extends MongoTemplate implements Empresti
         collection().find(query)
                 .forEach((Block<Document>) d -> {
                     emprestimos.add(new Emprestimo(
-                            new Valor(d.getDouble("valor"), Moeda.valueOf(d.getString("moeda"))),
-                            new Parcelas(d.getInteger("quantidadeParcelas")),
+                            new Valor(d.getDouble("valor"), Moeda.valueOf(d.getString("currency"))),
+                            new Parcelas(d.getInteger("loanInstallmentQuantity")),
                             contratante
                     ));
                 });

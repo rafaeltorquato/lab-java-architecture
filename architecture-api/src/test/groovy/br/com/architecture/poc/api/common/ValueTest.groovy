@@ -6,15 +6,15 @@ import spock.lang.Unroll
 /**
  * @author Rafael Torquato
  */
-class ValorTest extends Specification {
+class ValueTest extends Specification {
 
     def "deve falhar ao criar Valor com valor null"() {
         given:
         def valor = null
-        def moeda = Moeda.REAL
+        def moeda = Currency.REAL
 
         when:
-        new Valor(valor, moeda)
+        new Value(valor, moeda)
 
         then:
         thrown(NullPointerException.class)
@@ -26,7 +26,7 @@ class ValorTest extends Specification {
         def moeda = null
 
         when:
-        new Valor(valor, moeda)
+        new Value(valor, moeda)
 
         then:
         thrown(NullPointerException.class)
@@ -38,14 +38,14 @@ class ValorTest extends Specification {
         def valorDouble = 1.0
 
         when:
-        def valor = new Valor(valorDouble, moeda)
+        def valor = new Value(valorDouble, moeda)
 
         then:
         valor.toString() == valorFormatado
 
         where:
-        moeda      | valorFormatado
-        Moeda.REAL | 'R$ 1,00'
-        Moeda.USD  | '$1.00'
+        moeda         | valorFormatado
+        Currency.REAL | 'R$ 1,00'
+        Currency.USD  | '$1.00'
     }
 }

@@ -1,6 +1,6 @@
 package br.com.architecture.poc.javaee.persistence.jpa;
 
-import br.com.architecture.poc.api.domain.Emprestimo;
+import br.com.architecture.poc.api.loan.domain.Loan;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,12 +31,12 @@ public class EmprestimoEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataContratacao;
 
-    public EmprestimoEntity(Emprestimo emprestimo) {
-        cpf = emprestimo.getContratante().getCpf().toString();
-        identificador = emprestimo.getIdentificador();
-        dataContratacao = emprestimo.getDataContratacao();
-        quantidadeParcelas = emprestimo.getParcelas().intValue();
-        valor = new BigDecimal(emprestimo.getValor().doubleValue());
-        moeda = emprestimo.getValor().moeda().toString();
+    public EmprestimoEntity(Loan loan) {
+        cpf = loan.getHirer().getSocialSecurityNumber().toString();
+        identificador = loan.getIdentificador();
+        dataContratacao = loan.getDataContratacao();
+        quantidadeParcelas = loan.getLoanInstallment().intValue();
+        valor = new BigDecimal(loan.getValue().doubleValue());
+        moeda = loan.getValue().currency().toString();
     }
 }

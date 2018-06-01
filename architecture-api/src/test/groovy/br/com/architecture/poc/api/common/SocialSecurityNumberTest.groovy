@@ -5,7 +5,7 @@ import spock.lang.Specification
 /**
  * @author Rafael Torquato
  */
-class CPFTest extends Specification {
+class SocialSecurityNumberTest extends Specification {
 
 
     def "deve falhar ao criar CPF com menos de 11 digitos"() {
@@ -13,7 +13,7 @@ class CPFTest extends Specification {
         def cpfString = '9919872016'
 
         when:
-        new CPF(cpfString)
+        new SocialSecurityNumber(cpfString)
 
         then:
         thrown(IllegalArgumentException.class)
@@ -24,7 +24,7 @@ class CPFTest extends Specification {
         def cpfString = null
 
         when:
-        new CPF(cpfString)
+        new SocialSecurityNumber(cpfString)
 
         then:
         thrown(NullPointerException.class)
@@ -35,7 +35,7 @@ class CPFTest extends Specification {
         def cpfString = '99198720163'
 
         when:
-        def formatado = new CPF(cpfString).formatado()
+        def formatado = new SocialSecurityNumber(cpfString).formatado()
 
         then:
         formatado == '991.987.201-63'

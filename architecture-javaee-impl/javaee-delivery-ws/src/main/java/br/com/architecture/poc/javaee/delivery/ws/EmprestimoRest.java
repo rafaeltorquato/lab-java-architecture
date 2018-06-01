@@ -1,7 +1,7 @@
 package br.com.architecture.poc.javaee.delivery.ws;
 
 
-import br.com.architecture.poc.api.domain.*;
+import br.com.architecture.poc.api.loan.domain.*;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,19 +18,17 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class EmprestimoRest {
 
-    private static final Integer MAIORIDADE_PENAL = 18;
-
     @Inject
-    private EmprestimoRepository emprestimoRepository;
+    private LoanRepository loanRepository;
     @Inject
-    private ContratanteRepository contratanteRepository;
+    private HirerRepository hirerRepository;
 
     @POST
-    public Response contratar(ContratarEmprestimo.Solicitacao solicitacao) {
-        ContratarEmprestimo casoUso = new ContratarEmprestimo(contratanteRepository, emprestimoRepository, MAIORIDADE_PENAL);
+    public Response contratar(HireLoan.Request request) {
+        HireLoan casoUso = new HireLoan(hirerRepository, loanRepository);
         try {
-            return Response.ok(casoUso.executar(solicitacao)).build();
-        } catch (EmprestimoException e) {
+            return Response.ok(casoUso.executar(request)).build();
+        } catch (LoanException e) {
             return responseError(e);
         }
     }
@@ -38,23 +36,23 @@ public class EmprestimoRest {
     @GET
     @Path("/contratante/{cpf}")
     public Response doContratante(@PathParam("cpf") String cpf) {
-        ListarEmprestimosDoContratante casoUso = new ListarEmprestimosDoContratante(emprestimoRepository, contratanteRepository);
-        ListarEmprestimosDoContratante.Solicitacao entrada = new ListarEmprestimosDoContratante.Solicitacao(cpf);
+        GetHirerLoans casoUso = new GetHirerLoans(loanRepository, hirerRepository);
+        GetHirerLoans.Solicitacao entrada = new GetHirerLoans.Solicitacao(cpf);
         try {
             return Response.ok(casoUso.executar(entrada)).build();
-        } catch (EmprestimoException e) {
+        } catch (LoanException e) {
             return responseError(e);
         }
     }
 
-    private Response responseError(EmprestimoException e) {
-        Response.Status status = null;
-        switch (e.getMensagemErro()) {
-            case CONTRATANTE_INEXISTENTE: {
+    private Response responseError(LoanException e) {
+        Response.Status status;
+        switch (e.getErrorMessage()) {
+            case HIRER_DOES_NOT_EXIST: {
                 status = Response.Status.NOT_FOUND;
                 break;
             }
-            case CONTRATANTE_MORTO: {
+            default: {
                 status = Response.Status.BAD_REQUEST;
                 break;
             }

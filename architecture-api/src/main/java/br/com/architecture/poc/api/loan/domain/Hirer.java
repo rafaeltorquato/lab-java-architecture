@@ -1,6 +1,6 @@
-package br.com.architecture.poc.api.domain;
+package br.com.architecture.poc.api.loan.domain;
 
-import br.com.architecture.poc.api.common.CPF;
+import br.com.architecture.poc.api.common.SocialSecurityNumber;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,18 +14,18 @@ import java.util.Optional;
 /**
  * @author Rafael Torquato
  */
-@EqualsAndHashCode(of = "cpf")
-public class Contratante implements Serializable {
+@EqualsAndHashCode(of = "socialSecurityNumber")
+public class Hirer implements Serializable {
 
     @Getter
-    private final CPF cpf;
+    private final SocialSecurityNumber socialSecurityNumber;
     private final Date dataNascimento;
     private final Boolean emancipado;
     @Setter
     private Date dataMorte;
 
-    public Contratante(CPF cpf, Date dataNascimento, Boolean emancipado) {
-        this.cpf = Objects.requireNonNull(cpf);
+    public Hirer(SocialSecurityNumber socialSecurityNumber, Date dataNascimento, Boolean emancipado) {
+        this.socialSecurityNumber = Objects.requireNonNull(socialSecurityNumber);
         this.dataNascimento = Objects.requireNonNull(dataNascimento);
         this.emancipado = Objects.requireNonNull(emancipado);
     }

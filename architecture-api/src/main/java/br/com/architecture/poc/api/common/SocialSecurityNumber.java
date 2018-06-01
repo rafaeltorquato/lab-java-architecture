@@ -8,14 +8,15 @@ import java.io.Serializable;
  * @author Rafael Torquato
  */
 @EqualsAndHashCode(of = "naoFormatado")
-public final class CPF implements Serializable {
+public final class SocialSecurityNumber implements Serializable {
 
     private final String naoFormatado;
     private String formatado;
 
-    public CPF(String valor) {
+    public SocialSecurityNumber(String valor) {
         this.naoFormatado = valor.replaceAll("\\D", "");
-        if (this.naoFormatado.length() != 11) throw new IllegalArgumentException("N\u00E3o \u00E9 um CPF valido.");
+        if (this.naoFormatado.length() != 11)
+            throw new IllegalArgumentException("N\u00E3o \u00E9 um SocialSecurityNumber valido.");
     }
 
     public String formatado() {
