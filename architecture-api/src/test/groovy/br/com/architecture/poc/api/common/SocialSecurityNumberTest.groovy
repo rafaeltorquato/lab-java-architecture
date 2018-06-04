@@ -35,7 +35,7 @@ class SocialSecurityNumberTest extends Specification {
         def cpfString = '99198720163'
 
         when:
-        def formatado = new SocialSecurityNumber(cpfString).formatado()
+        def formatado = new SocialSecurityNumber(cpfString).mask()
 
         then:
         formatado == '991.987.201-63'

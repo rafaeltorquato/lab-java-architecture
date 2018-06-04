@@ -7,26 +7,26 @@ import java.io.Serializable;
 /**
  * @author Rafael Torquato
  */
-@EqualsAndHashCode(of = "naoFormatado")
+@EqualsAndHashCode(of = "unmasked")
 public final class SocialSecurityNumber implements Serializable {
 
-    private final String naoFormatado;
-    private String formatado;
+    private final String unmasked;
+    private String masked;
 
-    public SocialSecurityNumber(String valor) {
-        this.naoFormatado = valor.replaceAll("\\D", "");
-        if (this.naoFormatado.length() != 11)
-            throw new IllegalArgumentException("N\u00E3o \u00E9 um SocialSecurityNumber valido.");
+    public SocialSecurityNumber(String value) {
+        this.unmasked = value.replaceAll("\\D", "");
+        if (this.unmasked.length() != 11)
+            throw new IllegalArgumentException("SocialSecurityNumber invalid.");
     }
 
-    public String formatado() {
-        if (formatado == null)
-            formatado = naoFormatado.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
-        return formatado;
+    public String mask() {
+        if (masked == null)
+            masked = unmasked.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+        return masked;
     }
 
     @Override
     public String toString() {
-        return naoFormatado;
+        return unmasked;
     }
 }
