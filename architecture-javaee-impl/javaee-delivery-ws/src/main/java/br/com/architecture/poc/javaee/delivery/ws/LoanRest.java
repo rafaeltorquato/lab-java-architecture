@@ -35,7 +35,7 @@ public class LoanRest {
 
     @GET
     @Path("/hirer/{ssn}")
-    public Response doContratante(@PathParam("ssn") String ssn) {
+    public Response loansOfHirer(@PathParam("ssn") String ssn) {
         GetHirerLoans useCase = new GetHirerLoans(loanRepository, hirerRepository);
         GetHirerLoans.Request request = new GetHirerLoans.Request(ssn);
         try {
@@ -54,7 +54,6 @@ public class LoanRest {
             }
             default: {
                 status = Response.Status.BAD_REQUEST;
-                break;
             }
         }
         return Response.status(status).entity(new ErrorMessage(e)).build();
