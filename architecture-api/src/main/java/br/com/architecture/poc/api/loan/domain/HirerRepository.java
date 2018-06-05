@@ -6,5 +6,5 @@ import br.com.architecture.poc.api.common.SSN;
  * @author Rafael Torquato
  */
 public interface HirerRepository {
-    Hirer bySocialSecurityNumber(SSN SSN);
+    Hirer bySocialSecurityNumber(SSN ssn);
 }

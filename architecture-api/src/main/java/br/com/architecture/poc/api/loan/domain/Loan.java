@@ -13,17 +13,17 @@ import java.util.UUID;
  * @author Rafael Torquato
  */
 @Getter
-@EqualsAndHashCode(of = "identificador")
+@EqualsAndHashCode(of = "identifier")
 public class Loan implements Serializable {
 
-    private final UUID identificador;
+    private final UUID identifier;
     private final MoneyValue moneyValue;
     private final LoanInstallment loanInstallment;
     private final Hirer hirer;
     private final Date contractDate;
 
     public Loan(MoneyValue moneyValue, LoanInstallment loanInstallment, Hirer hirer) {
-        this.identificador = UUID.randomUUID();
+        this.identifier = UUID.randomUUID();
         this.moneyValue = Objects.requireNonNull(moneyValue);
         this.loanInstallment = Objects.requireNonNull(loanInstallment);
         this.hirer = Objects.requireNonNull(hirer);

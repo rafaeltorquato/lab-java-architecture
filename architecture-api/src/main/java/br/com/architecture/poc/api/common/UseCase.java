@@ -5,6 +5,6 @@ import br.com.architecture.poc.api.loan.domain.LoanException;
 /**
  * @author Rafael Torquato
  */
-public interface UseCase<E, S> {
-    S executar(E entrada) throws LoanException;
+public interface UseCase<I, O> {
+    O execute(I input) throws LoanException;
 }

@@ -17,30 +17,24 @@ import java.util.Map;
 @Singleton
 public class HirerRepositoryStubs implements HirerRepository {
 
-    private Map<SSN, Hirer> contratantes = new HashMap<>();
+    private Map<SSN, Hirer> hirerList = new HashMap<>();
 
     @PostConstruct
-    public void criarMocks() {
+    public void createMocks() {
         try {
             SimpleDateFormat ddMMyyyy = new SimpleDateFormat("ddMMyyyy");
             Hirer hirer1 = new Hirer(
-                    new SSN("99198720163"),
+                    new SSN("999872063"),
                     ddMMyyyy.parse("07101982")
             );
-            contratantes.put(hirer1.getSSN(), hirer1);
+            hirerList.put(hirer1.getSsn(), hirer1);
 
             Hirer hirer2 = new Hirer(
-                    new SSN("99476239042"),
+                    new SSN("997623942"),
                     ddMMyyyy.parse("01012000")
             );
             hirer2.setDateOfDeath(ddMMyyyy.parse("01012018"));
-            contratantes.put(hirer2.getSSN(), hirer2);
-
-            Hirer hirer3 = new Hirer(
-                    new SSN("66529623060"),
-                    ddMMyyyy.parse("01012005")
-            );
-            contratantes.put(hirer3.getSSN(), hirer3);
+            hirerList.put(hirer2.getSsn(), hirer2);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -48,6 +42,6 @@ public class HirerRepositoryStubs implements HirerRepository {
 
     @Override
     public Hirer bySocialSecurityNumber(SSN SSN) {
-        return contratantes.get(SSN);
+        return hirerList.get(SSN);
     }
 }

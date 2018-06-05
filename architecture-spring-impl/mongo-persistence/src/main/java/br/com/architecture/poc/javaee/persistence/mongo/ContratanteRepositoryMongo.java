@@ -22,15 +22,15 @@ public class ContratanteRepositoryMongo extends MongoTemplate implements Contrat
     @Override
     public Contratante porCPF(CPF cpf) {
         BasicDBObject query = new BasicDBObject();
-        query.put("cpf", cpf.toString());
+        query.put("ssn", cpf.toString());
 
         Document document = collection().find(query).first();
 
         Contratante contratante = null;
         if (!document.isEmpty()) {
             contratante = new Contratante(
-                    new CPF(document.getString("cpf")),
-                    document.getDate("dataNascimento"),
+                    new CPF(document.getString("ssn")),
+                    document.getDate("birthDate"),
                     document.getBoolean("emancipado")
             );
             contratante.setDataMorte(document.getDate("dateOfDeath"));

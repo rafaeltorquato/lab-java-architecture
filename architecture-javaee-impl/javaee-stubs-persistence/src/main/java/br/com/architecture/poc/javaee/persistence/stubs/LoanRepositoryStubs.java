@@ -17,16 +17,16 @@ import java.util.stream.Collectors;
 @Singleton
 public class LoanRepositoryStubs implements LoanRepository {
 
-    private Map<UUID, Loan> emprestimos = new ConcurrentHashMap<>();
+    private Map<UUID, Loan> loanList = new ConcurrentHashMap<>();
 
     @Override
     public void store(Loan loan) {
-        emprestimos.putIfAbsent(loan.getIdentificador(), loan);
+        loanList.putIfAbsent(loan.getIdentifier(), loan);
     }
 
     @Override
     public List<Loan> loansOfHirer(Hirer hirer) {
-        return emprestimos.values().stream()
+        return loanList.values().stream()
                 .filter(e -> e.getHirer().equals(hirer))
                 .collect(Collectors.toList());
     }

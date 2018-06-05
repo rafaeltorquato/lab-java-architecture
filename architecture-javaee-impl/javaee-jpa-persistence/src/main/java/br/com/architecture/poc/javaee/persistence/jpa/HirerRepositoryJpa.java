@@ -19,15 +19,15 @@ public class HirerRepositoryJpa implements HirerRepository {
     private EntityManager em;
 
     @Override
-    public Hirer bySocialSecurityNumber(SSN SSN) {
-        ContratanteEntity entidade = em.find(ContratanteEntity.class, SSN.toString());
+    public Hirer bySocialSecurityNumber(SSN ssn) {
+        HirerEntity entity = em.find(HirerEntity.class, ssn.toString());
         Hirer hirer = null;
-        if (entidade != null) {
+        if (entity != null) {
             hirer = new Hirer(
-                    SSN,
-                    entidade.getDataNascimento()
+                    ssn,
+                    entity.getBirthDate()
             );
-            hirer.setDateOfDeath(entidade.getDataMorte());
+            hirer.setDateOfDeath(entity.getDateOfDeath());
         }
         return hirer;
     }

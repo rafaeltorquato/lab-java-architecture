@@ -14,12 +14,11 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-public class ContratanteEntity implements Serializable {
+public class HirerEntity implements Serializable {
 
-    //TODO Contrutor com Hirer
     @Id
-    private String cpf;
-    private Date dataNascimento;
-    private Date dataMorte;
-    private Boolean emancipado;
+    private String ssn;
+    private Date birthDate;
+    private Date dateOfDeath;
+
 }

@@ -14,20 +14,20 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 public class GetHirerLoans implements
-        UseCase<GetHirerLoans.Solicitacao, List<GetHirerLoans.Resposta>> {
+        UseCase<GetHirerLoans.Request, List<GetHirerLoans.Response>> {
 
     private final LoanRepository loanRepository;
     private final HirerRepository hirerRepository;
 
     @Override
-    public List<Resposta> executar(Solicitacao entrada) throws LoanException {
-        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(entrada.cpfContratante));
+    public List<Response> execute(Request entrada) throws LoanException {
+        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(entrada.hirerSsn));
         erroSeContratanteInexistente(hirer);
         erroSeContratanteMorto(hirer);
 
         return loanRepository.loansOfHirer(hirer).stream()
                 .map(e -> {
-                    Resposta r = new Resposta();
+                    Response r = new Response();
                     r.currency = e.getMoneyValue().currency().toString();
                     r.loanInstallmentQuantity = e.getLoanInstallment().intValue();
                     r.valor = e.getMoneyValue().doubleValue();
@@ -48,12 +48,12 @@ public class GetHirerLoans implements
 
     @Data
     @AllArgsConstructor
-    public static class Solicitacao {
-        private String cpfContratante;
+    public static class Request {
+        private String hirerSsn;
     }
 
     @Data
-    public class Resposta {
+    public class Response {
         private Double valor;
         private String currency;
         private Integer loanInstallmentQuantity;

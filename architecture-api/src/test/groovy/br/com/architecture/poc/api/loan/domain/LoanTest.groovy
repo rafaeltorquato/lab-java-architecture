@@ -1,8 +1,8 @@
 package br.com.architecture.poc.api.loan.domain
 
 import br.com.architecture.poc.api.common.Currency
-import br.com.architecture.poc.api.common.SSN
 import br.com.architecture.poc.api.common.MoneyValue
+import br.com.architecture.poc.api.common.SSN
 import spock.lang.Specification
 
 /**
@@ -10,46 +10,48 @@ import spock.lang.Specification
  */
 class LoanTest extends Specification {
 
-    def "deve falhar ao criar Emprestimo com valor null"() {
-        given:
-        def valor = null
-        def parcelas = new LoanInstallment(10)
-        def contratante = new Hirer(
-                new SSN("99198720163"),
+    Hirer hirer
+    MoneyValue value
+    LoanInstallment loanInstallment
+
+    def setup() {
+        hirer = new Hirer(
+                new SSN("991987201"),
                 new Date()
         )
+        value = new MoneyValue(10000.00, Currency.REAL)
+        loanInstallment = new LoanInstallment(10)
+    }
+
+    def "Should fail when create a Loan with null value"() {
+        given:
+        def value = null
+
 
         when:
-        new Loan(valor, parcelas, contratante)
+        new Loan(value, loanInstallment, hirer)
 
         then:
         thrown(NullPointerException.class)
     }
 
-    def "deve falhar ao criar Emprestimo com parcelas null"() {
+    def "Should fail when create a loan with null installment"() {
         given:
-        def valor = new MoneyValue(10000.00, Currency.REAL)
-        def parcelas = null
-        def contratante = new Hirer(
-                new SSN("99198720163"),
-                new Date()
-        )
+        def loanInstallment = null
 
         when:
-        new Loan(valor, parcelas, contratante)
+        new Loan(value, loanInstallment, hirer)
 
         then:
         thrown(NullPointerException.class)
     }
 
-    def "deve falhar ao criar Emprestimo com contratante null"() {
+    def "Should fail when create a loan with a null hirer"() {
         given:
-        def valor = new MoneyValue(10000.00, Currency.REAL)
-        def parcelas = null
-        def contratante = null
+        def hirer = null
 
         when:
-        new Loan(valor, parcelas, contratante)
+        new Loan(value, loanInstallment, hirer)
 
         then:
         thrown(NullPointerException.class)

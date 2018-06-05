@@ -17,13 +17,14 @@ import java.util.Optional;
 public class Hirer implements Serializable {
 
     @Getter
-    private final SSN SSN;
+    private final SSN ssn;
+    @Getter
     private final Date birthDate;
     @Setter
     private Date dateOfDeath;
 
     public Hirer(SSN SSN, Date birthDate) {
-        this.SSN = Objects.requireNonNull(SSN);
+        this.ssn = Objects.requireNonNull(SSN);
         this.birthDate = Objects.requireNonNull(birthDate);
     }
 

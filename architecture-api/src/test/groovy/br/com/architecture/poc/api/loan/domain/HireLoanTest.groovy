@@ -8,32 +8,32 @@ import spock.lang.Specification
  */
 class HireLoanTest extends Specification {
 
-    def "Should fail beacause hirer does not exist"() {
+    def "Should fail because hirer does not exist"() {
         given:
-        def contratanteRepository = Mock(HirerRepository)
-        contratanteRepository.bySocialSecurityNumber(_) >> { null }
+        def hirerRepository = Mock(HirerRepository)
+        hirerRepository.bySocialSecurityNumber(_) >> { null }
 
-        def emprestimoRepository = Mock(LoanRepository)
-        emprestimoRepository.store(_) >> {}
+        def loanRepository = Mock(LoanRepository)
+        loanRepository.store(_) >> {}
 
-        def solicitacao = new HireLoan.Request()
-        solicitacao.cpf = "99198720163"
-        solicitacao.valor = 1000.00D
-        solicitacao.moeda = Currency.USD.toString()
-        solicitacao.quantidadeParcelas = 10
+        def request = new HireLoan.Request()
+        request.ssn = "919872016"
+        request.value = 1000.00D
+        request.currency = Currency.USD.toString()
+        request.loanInstallment = 10
 
-        def contratarEmprestimo = new HireLoan(
-                contratanteRepository,
-                emprestimoRepository
+        def useCase = new HireLoan(
+                hirerRepository,
+                loanRepository
         )
         when:
-        contratarEmprestimo.executar(solicitacao)
+        useCase.execute(request)
 
         then:
         def e = thrown(LoanException.class)
         e.errorMessage == ErrorMessage.HIRER_DOES_NOT_EXIST
-        1 * contratanteRepository.bySocialSecurityNumber(_)
-        0 * emprestimoRepository.store(_)
+        1 * hirerRepository.bySocialSecurityNumber(_)
+        0 * loanRepository.store(_)
     }
 
 }

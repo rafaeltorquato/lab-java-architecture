@@ -7,26 +7,26 @@ import java.io.Serializable;
 /**
  * @author Rafael Torquato
  */
-@EqualsAndHashCode(of = "raw")
+@EqualsAndHashCode(of = "unmasked")
 public final class SSN implements Serializable {
 
-    private final String raw;
-    private String formatted;
+    private final String unmasked;
+    private String masked;
 
     public SSN(String value) {
-        this.raw = value.replaceAll("\\D", "");
-        if (this.raw.length() != 9)
-            throw new IllegalArgumentException("Not valid SSN.");
+        this.unmasked = value.replaceAll("\\D", "");
+        if (this.unmasked.length() != 9)
+            throw new IllegalArgumentException("Invalid Social Security Number (SSN)!");
     }
 
-    public String formatted() {
-        if (formatted == null)
-            formatted = raw.replaceAll("(\\d{3})(\\d{2})(\\d{4})", "$1-$2-$3");
-        return formatted;
+    public String mask() {
+        if (masked == null)
+            masked = unmasked.replaceAll("(\\d{3})(\\d{2})(\\d{4})", "$1-$2-$3");
+        return masked;
     }
 
     @Override
     public String toString() {
-        return raw;
+        return unmasked;
     }
 }

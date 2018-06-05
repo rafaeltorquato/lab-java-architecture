@@ -8,25 +8,25 @@ import spock.lang.Specification
  */
 class HirerTest extends Specification {
 
-    def "deve falhar ao criar Contratante com cpf null"() {
+    def "Should fail when create a Hirer without null ssn"() {
         given:
-        def cpf = null
-        def dataNascimento = new Date()
+        def ssn = null
+        def birthDate = new Date()
 
         when:
-        new Hirer(cpf, dataNascimento)
+        new Hirer(ssn, birthDate)
 
         then:
         thrown(NullPointerException.class)
     }
 
-    def "deve falhar ao criar Contratante com dataNascimento null"() {
+    def "Should fail when create a Hirer with null no birthDate"() {
         given:
-        def cpf = new SSN("99198720163")
-        def dataNascimento = null
+        def ssn = new SSN("991987201")
+        def birthDate = null
 
         when:
-        new Hirer(cpf, dataNascimento)
+        new Hirer(ssn, birthDate)
 
         then:
         thrown(NullPointerException.class)

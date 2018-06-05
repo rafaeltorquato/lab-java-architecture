@@ -32,15 +32,15 @@ class SSNTest extends Specification {
         thrown(NullPointerException.class)
     }
 
-    def "should format a SSN"() {
+    def "should mask a SSN"() {
         given:
         def ssnString = '991982016'
 
         when:
-        def formatted = new SSN(ssnString).formatted()
+        def masked = new SSN(ssnString).mask()
 
         then:
-        formatted == '991-98-2016'
-    }
+        masked == '991-98-2016'
 
+    }
 }

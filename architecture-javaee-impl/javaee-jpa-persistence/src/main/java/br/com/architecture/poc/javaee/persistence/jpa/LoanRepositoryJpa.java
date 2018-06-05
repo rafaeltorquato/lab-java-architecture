@@ -4,8 +4,8 @@ import br.com.architecture.poc.api.common.Currency;
 import br.com.architecture.poc.api.common.MoneyValue;
 import br.com.architecture.poc.api.loan.domain.Hirer;
 import br.com.architecture.poc.api.loan.domain.Loan;
-import br.com.architecture.poc.api.loan.domain.LoanRepository;
 import br.com.architecture.poc.api.loan.domain.LoanInstallment;
+import br.com.architecture.poc.api.loan.domain.LoanRepository;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -24,18 +24,18 @@ public class LoanRepositoryJpa implements LoanRepository {
 
     @Override
     public void store(Loan loan) {
-        em.persist(new EmprestimoEntity(loan));
+        em.persist(new LoanEntity(loan));
     }
 
     @Override
     public List<Loan> loansOfHirer(Hirer hirer) {
-        List<EmprestimoEntity> lista = em.createQuery("select e from EmprestimoEntity e where e.cpf = :cpf ")
-                .setParameter("cpf", hirer.getSSN().toString())
+        List<LoanEntity> lista = em.createQuery("select e from EmprestimoEntity e where e.cpf = :cpf ")
+                .setParameter("cpf", hirer.getSsn().toString())
                 .getResultList();
         return lista.stream()
                 .map(e -> new Loan(
-                        new MoneyValue(e.getValor().doubleValue(), Currency.valueOf(e.getMoeda())),
-                        new LoanInstallment(e.getQuantidadeParcelas()),
+                        new MoneyValue(e.getValue().doubleValue(), Currency.valueOf(e.getCurrency())),
+                        new LoanInstallment(e.getLoanInstallment()),
                         hirer))
                 .collect(Collectors.toList());
     }

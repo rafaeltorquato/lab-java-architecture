@@ -27,7 +27,7 @@ public class EmprestimoRest {
     public Response contratar(HireLoan.Request request) {
         HireLoan casoUso = new HireLoan(hirerRepository, loanRepository);
         try {
-            return Response.ok(casoUso.executar(request)).build();
+            return Response.ok(casoUso.execute(request)).build();
         } catch (LoanException e) {
             return responseError(e);
         }
@@ -37,9 +37,9 @@ public class EmprestimoRest {
     @Path("/contratante/{cpf}")
     public Response doContratante(@PathParam("cpf") String cpf) {
         GetHirerLoans casoUso = new GetHirerLoans(loanRepository, hirerRepository);
-        GetHirerLoans.Solicitacao entrada = new GetHirerLoans.Solicitacao(cpf);
+        GetHirerLoans.Request entrada = new GetHirerLoans.Request(cpf);
         try {
-            return Response.ok(casoUso.executar(entrada)).build();
+            return Response.ok(casoUso.execute(entrada)).build();
         } catch (LoanException e) {
             return responseError(e);
         }

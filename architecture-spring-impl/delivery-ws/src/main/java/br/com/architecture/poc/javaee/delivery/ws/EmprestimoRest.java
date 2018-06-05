@@ -8,7 +8,6 @@ import br.coop.cooperforte.architecture.api.dominio.EmprestimoRepository;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -39,8 +38,8 @@ public class EmprestimoRest {
     }
 
     @GET
-    @Path("/contratante/{cpf}")
-    public Response doContratante(@PathParam("cpf") String cpf) {
+    @Path("/contratante/{ssn}")
+    public Response doContratante(@PathParam("ssn") String cpf) {
         ListarEmprestimosDoContratante casoUso = new ListarEmprestimosDoContratante(emprestimoRepository, contratanteRepository);
         ListarEmprestimosDoContratante.Solicitacao entrada = new ListarEmprestimosDoContratante.Solicitacao(cpf);
         try {
