@@ -5,12 +5,12 @@ import java.util.Objects;
 /**
  * @author Rafael Torquato
  */
-public final class Value extends Number {
+public final class MoneyValue extends Number {
     private final Double value;
     private final Currency currency;
     private transient String toStringCache;
 
-    public Value(Double value, Currency currency) {
+    public MoneyValue(Double value, Currency currency) {
         this.value = Objects.requireNonNull(value);
         this.currency = Objects.requireNonNull(currency);
     }

@@ -1,6 +1,6 @@
 package br.com.architecture.poc.javaee.persistence.stubs;
 
-import br.com.architecture.poc.api.common.SocialSecurityNumber;
+import br.com.architecture.poc.api.common.SSN;
 import br.com.architecture.poc.api.loan.domain.Hirer;
 import br.com.architecture.poc.api.loan.domain.HirerRepository;
 
@@ -17,37 +17,37 @@ import java.util.Map;
 @Singleton
 public class HirerRepositoryStubs implements HirerRepository {
 
-    private Map<SocialSecurityNumber, Hirer> contratantes = new HashMap<>();
+    private Map<SSN, Hirer> contratantes = new HashMap<>();
 
     @PostConstruct
     public void criarMocks() {
         try {
             SimpleDateFormat ddMMyyyy = new SimpleDateFormat("ddMMyyyy");
             Hirer hirer1 = new Hirer(
-                    new SocialSecurityNumber("99198720163"),
+                    new SSN("99198720163"),
                     ddMMyyyy.parse("07101982")
             );
-            contratantes.put(hirer1.getSocialSecurityNumber(), hirer1);
+            contratantes.put(hirer1.getSSN(), hirer1);
 
             Hirer hirer2 = new Hirer(
-                    new SocialSecurityNumber("99476239042"),
+                    new SSN("99476239042"),
                     ddMMyyyy.parse("01012000")
             );
             hirer2.setDateOfDeath(ddMMyyyy.parse("01012018"));
-            contratantes.put(hirer2.getSocialSecurityNumber(), hirer2);
+            contratantes.put(hirer2.getSSN(), hirer2);
 
             Hirer hirer3 = new Hirer(
-                    new SocialSecurityNumber("66529623060"),
+                    new SSN("66529623060"),
                     ddMMyyyy.parse("01012005")
             );
-            contratantes.put(hirer3.getSocialSecurityNumber(), hirer3);
+            contratantes.put(hirer3.getSSN(), hirer3);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public Hirer bySocialSecurityNumber(SocialSecurityNumber socialSecurityNumber) {
-        return contratantes.get(socialSecurityNumber);
+    public Hirer bySocialSecurityNumber(SSN SSN) {
+        return contratantes.get(SSN);
     }
 }

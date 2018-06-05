@@ -1,6 +1,6 @@
 package br.com.architecture.poc.api.loan.domain;
 
-import br.com.architecture.poc.api.common.Value;
+import br.com.architecture.poc.api.common.MoneyValue;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -17,14 +17,14 @@ import java.util.UUID;
 public class Loan implements Serializable {
 
     private final UUID identificador;
-    private final Value value;
+    private final MoneyValue moneyValue;
     private final LoanInstallment loanInstallment;
     private final Hirer hirer;
     private final Date contractDate;
 
-    public Loan(Value value, LoanInstallment loanInstallment, Hirer hirer) {
+    public Loan(MoneyValue moneyValue, LoanInstallment loanInstallment, Hirer hirer) {
         this.identificador = UUID.randomUUID();
-        this.value = Objects.requireNonNull(value);
+        this.moneyValue = Objects.requireNonNull(moneyValue);
         this.loanInstallment = Objects.requireNonNull(loanInstallment);
         this.hirer = Objects.requireNonNull(hirer);
         this.contractDate = new Date();

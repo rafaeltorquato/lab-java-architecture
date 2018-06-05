@@ -1,6 +1,6 @@
 package br.com.architecture.poc.api.loan.domain
 
-import br.com.architecture.poc.api.common.SocialSecurityNumber
+import br.com.architecture.poc.api.common.SSN
 import spock.lang.Specification
 
 /**
@@ -22,7 +22,7 @@ class HirerTest extends Specification {
 
     def "deve falhar ao criar Contratante com dataNascimento null"() {
         given:
-        def cpf = new SocialSecurityNumber("99198720163")
+        def cpf = new SSN("99198720163")
         def dataNascimento = null
 
         when:

@@ -32,11 +32,11 @@ public class EmprestimoEntity implements Serializable {
     private Date dataContratacao;
 
     public EmprestimoEntity(Loan loan) {
-        cpf = loan.getHirer().getSocialSecurityNumber().toString();
+        cpf = loan.getHirer().getSSN().toString();
         identificador = loan.getIdentificador();
         dataContratacao = loan.getContractDate();
         quantidadeParcelas = loan.getLoanInstallment().intValue();
-        valor = new BigDecimal(loan.getValue().doubleValue());
-        moeda = loan.getValue().currency().toString();
+        valor = new BigDecimal(loan.getMoneyValue().doubleValue());
+        moeda = loan.getMoneyValue().currency().toString();
     }
 }

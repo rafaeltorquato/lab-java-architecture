@@ -56,7 +56,7 @@
                 </exclude>
 
                 <exclude name="org.glassfish.sample.exclude.filter.*">
-                    <if-system-property name="verbosity" value="low"/>
+                    <if-system-property name="verbosity" moneyValue="low"/>
                 </exclude>
 
                 <exclude name="org.glassfish.sample.exclude.filter.**">

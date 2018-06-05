@@ -1,6 +1,6 @@
 package br.com.architecture.poc.api.loan.domain;
 
-import br.com.architecture.poc.api.common.SocialSecurityNumber;
+import br.com.architecture.poc.api.common.SSN;
 import br.com.architecture.poc.api.common.UseCase;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,16 +21,16 @@ public class GetHirerLoans implements
 
     @Override
     public List<Resposta> executar(Solicitacao entrada) throws LoanException {
-        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SocialSecurityNumber(entrada.cpfContratante));
+        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(entrada.cpfContratante));
         erroSeContratanteInexistente(hirer);
         erroSeContratanteMorto(hirer);
 
         return loanRepository.loansOfHirer(hirer).stream()
                 .map(e -> {
                     Resposta r = new Resposta();
-                    r.currency = e.getValue().currency().toString();
+                    r.currency = e.getMoneyValue().currency().toString();
                     r.loanInstallmentQuantity = e.getLoanInstallment().intValue();
-                    r.valor = e.getValue().doubleValue();
+                    r.valor = e.getMoneyValue().doubleValue();
                     return r;
                 })
                 .collect(Collectors.toList());

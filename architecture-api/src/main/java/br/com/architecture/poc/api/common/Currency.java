@@ -16,7 +16,7 @@ public enum Currency implements Serializable {
         locale = new Locale(language, country);
     }
 
-    public String format(Value value) {
-        return NumberFormat.getCurrencyInstance(locale).format(value);
+    public String format(MoneyValue moneyValue) {
+        return NumberFormat.getCurrencyInstance(locale).format(moneyValue);
     }
 }

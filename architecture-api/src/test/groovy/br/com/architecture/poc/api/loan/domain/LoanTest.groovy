@@ -1,8 +1,8 @@
 package br.com.architecture.poc.api.loan.domain
 
 import br.com.architecture.poc.api.common.Currency
-import br.com.architecture.poc.api.common.SocialSecurityNumber
-import br.com.architecture.poc.api.common.Value
+import br.com.architecture.poc.api.common.SSN
+import br.com.architecture.poc.api.common.MoneyValue
 import spock.lang.Specification
 
 /**
@@ -15,7 +15,7 @@ class LoanTest extends Specification {
         def valor = null
         def parcelas = new LoanInstallment(10)
         def contratante = new Hirer(
-                new SocialSecurityNumber("99198720163"),
+                new SSN("99198720163"),
                 new Date()
         )
 
@@ -28,10 +28,10 @@ class LoanTest extends Specification {
 
     def "deve falhar ao criar Emprestimo com parcelas null"() {
         given:
-        def valor = new Value(10000.00, Currency.REAL)
+        def valor = new MoneyValue(10000.00, Currency.REAL)
         def parcelas = null
         def contratante = new Hirer(
-                new SocialSecurityNumber("99198720163"),
+                new SSN("99198720163"),
                 new Date()
         )
 
@@ -44,7 +44,7 @@ class LoanTest extends Specification {
 
     def "deve falhar ao criar Emprestimo com contratante null"() {
         given:
-        def valor = new Value(10000.00, Currency.REAL)
+        def valor = new MoneyValue(10000.00, Currency.REAL)
         def parcelas = null
         def contratante = null
 

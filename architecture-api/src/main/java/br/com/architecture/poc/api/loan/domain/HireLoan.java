@@ -1,9 +1,9 @@
 package br.com.architecture.poc.api.loan.domain;
 
 import br.com.architecture.poc.api.common.Currency;
-import br.com.architecture.poc.api.common.SocialSecurityNumber;
+import br.com.architecture.poc.api.common.SSN;
 import br.com.architecture.poc.api.common.UseCase;
-import br.com.architecture.poc.api.common.Value;
+import br.com.architecture.poc.api.common.MoneyValue;
 import lombok.*;
 
 import java.io.Serializable;
@@ -19,11 +19,11 @@ public class HireLoan implements UseCase<HireLoan.Request, HireLoan.Response> {
 
     @Override
     public Response executar(Request req) throws LoanException {
-        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SocialSecurityNumber(req.cpf));
+        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(req.cpf));
         erroSeContratanteInexistente(hirer);
 
         Loan loan = new Loan(
-                new Value(req.valor, Currency.valueOf(req.moeda)),
+                new MoneyValue(req.valor, Currency.valueOf(req.moeda)),
                 new LoanInstallment(req.quantidadeParcelas),
                 hirer
         );

@@ -1,7 +1,7 @@
 package br.com.architecture.poc.javaee.persistence.jpa;
 
 
-import br.com.architecture.poc.api.common.SocialSecurityNumber;
+import br.com.architecture.poc.api.common.SSN;
 import br.com.architecture.poc.api.loan.domain.Hirer;
 import br.com.architecture.poc.api.loan.domain.HirerRepository;
 
@@ -19,12 +19,12 @@ public class HirerRepositoryJpa implements HirerRepository {
     private EntityManager em;
 
     @Override
-    public Hirer bySocialSecurityNumber(SocialSecurityNumber socialSecurityNumber) {
-        ContratanteEntity entidade = em.find(ContratanteEntity.class, socialSecurityNumber.toString());
+    public Hirer bySocialSecurityNumber(SSN SSN) {
+        ContratanteEntity entidade = em.find(ContratanteEntity.class, SSN.toString());
         Hirer hirer = null;
         if (entidade != null) {
             hirer = new Hirer(
-                    socialSecurityNumber,
+                    SSN,
                     entidade.getDataNascimento()
             );
             hirer.setDateOfDeath(entidade.getDataMorte());

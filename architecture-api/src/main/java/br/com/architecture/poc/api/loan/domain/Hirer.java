@@ -1,6 +1,6 @@
 package br.com.architecture.poc.api.loan.domain;
 
-import br.com.architecture.poc.api.common.SocialSecurityNumber;
+import br.com.architecture.poc.api.common.SSN;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,17 +13,17 @@ import java.util.Optional;
 /**
  * @author Rafael Torquato
  */
-@EqualsAndHashCode(of = "socialSecurityNumber")
+@EqualsAndHashCode(of = "SSN")
 public class Hirer implements Serializable {
 
     @Getter
-    private final SocialSecurityNumber socialSecurityNumber;
+    private final SSN SSN;
     private final Date birthDate;
     @Setter
     private Date dateOfDeath;
 
-    public Hirer(SocialSecurityNumber socialSecurityNumber, Date birthDate) {
-        this.socialSecurityNumber = Objects.requireNonNull(socialSecurityNumber);
+    public Hirer(SSN SSN, Date birthDate) {
+        this.SSN = Objects.requireNonNull(SSN);
         this.birthDate = Objects.requireNonNull(birthDate);
     }
 
