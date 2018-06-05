@@ -12,11 +12,11 @@ import javax.ws.rs.core.Response;
 /**
  * @author Rafael Torquato
  */
-@Path("/emprestimo")
+@Path("/loan")
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
 @Stateless
-public class EmprestimoRest {
+public class LoanRest {
 
     @Inject
     private LoanRepository loanRepository;
@@ -24,22 +24,22 @@ public class EmprestimoRest {
     private HirerRepository hirerRepository;
 
     @POST
-    public Response contratar(HireLoan.Request request) {
-        HireLoan casoUso = new HireLoan(hirerRepository, loanRepository);
+    public Response hire(HireLoan.Request request) {
+        HireLoan useCase = new HireLoan(hirerRepository, loanRepository);
         try {
-            return Response.ok(casoUso.execute(request)).build();
+            return Response.ok(useCase.execute(request)).build();
         } catch (LoanException e) {
             return responseError(e);
         }
     }
 
     @GET
-    @Path("/contratante/{cpf}")
-    public Response doContratante(@PathParam("cpf") String cpf) {
-        GetHirerLoans casoUso = new GetHirerLoans(loanRepository, hirerRepository);
-        GetHirerLoans.Request entrada = new GetHirerLoans.Request(cpf);
+    @Path("/hirer/{ssn}")
+    public Response doContratante(@PathParam("ssn") String ssn) {
+        GetHirerLoans useCase = new GetHirerLoans(loanRepository, hirerRepository);
+        GetHirerLoans.Request request = new GetHirerLoans.Request(ssn);
         try {
-            return Response.ok(casoUso.execute(entrada)).build();
+            return Response.ok(useCase.execute(request)).build();
         } catch (LoanException e) {
             return responseError(e);
         }
