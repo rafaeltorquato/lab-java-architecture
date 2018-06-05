@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * @author Rafael Torquato
  */
-@EqualsAndHashCode(of = "SSN")
+@EqualsAndHashCode(of = "ssn")
 public class Hirer implements Serializable {
 
     @Getter

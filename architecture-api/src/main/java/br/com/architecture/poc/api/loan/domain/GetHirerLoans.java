@@ -20,28 +20,22 @@ public class GetHirerLoans implements
     private final HirerRepository hirerRepository;
 
     @Override
-    public List<Response> execute(Request entrada) throws LoanException {
-        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(entrada.hirerSsn));
-        erroSeContratanteInexistente(hirer);
-        erroSeContratanteMorto(hirer);
+    public List<Response> execute(Request request) throws LoanException {
+        Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(request.hirerSsn));
+        failIfHirerDoesNotExist(hirer);
+        failIfHirerIsDead(hirer);
 
         return loanRepository.loansOfHirer(hirer).stream()
-                .map(e -> {
-                    Response r = new Response();
-                    r.currency = e.getMoneyValue().currency().toString();
-                    r.loanInstallmentQuantity = e.getLoanInstallment().intValue();
-                    r.valor = e.getMoneyValue().doubleValue();
-                    return r;
-                })
+                .map(Response::new)
                 .collect(Collectors.toList());
     }
 
-    private void erroSeContratanteInexistente(Hirer hirer) throws LoanException {
+    private void failIfHirerDoesNotExist(Hirer hirer) throws LoanException {
         if (hirer == null)
             throw new LoanException(ErrorMessage.HIRER_DOES_NOT_EXIST);
     }
 
-    private void erroSeContratanteMorto(Hirer hirer) throws LoanException {
+    private void failIfHirerIsDead(Hirer hirer) throws LoanException {
         if (hirer.dead())
             throw new LoanException(ErrorMessage.HIRER_IS_DEAD);
     }
@@ -54,9 +48,15 @@ public class GetHirerLoans implements
 
     @Data
     public class Response {
-        private Double valor;
+        private Double value;
         private String currency;
         private Integer loanInstallmentQuantity;
+
+        public Response(Loan l) {
+            currency = l.getMoneyValue().currency().toString();
+            value = l.getMoneyValue().doubleValue();
+            loanInstallmentQuantity = l.getLoanInstallment().intValue();
+        }
     }
 
 }
