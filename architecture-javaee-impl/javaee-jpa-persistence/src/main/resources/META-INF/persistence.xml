@@ -6,10 +6,11 @@
         <jta-data-source>java:/MyDS</jta-data-source>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="drop-and-create"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.connection.charSet" value="UTF-8"/>
+            <property name="javax.persistence.sql-load-script-source" value="initial-setup.sql"/>
         </properties>
     </persistence-unit>
 </persistence>
