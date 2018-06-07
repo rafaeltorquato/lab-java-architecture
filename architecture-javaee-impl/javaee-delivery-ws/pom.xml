@@ -71,10 +71,21 @@
             <dependencies>
                 <dependency>
                     <groupId>br.com.architecture.poc</groupId>
-                    <artifactId>mongo-persistence</artifactId>
+                    <artifactId>javaee-stubs-persistence</artifactId>
                     <version>1.0-SNAPSHOT</version>
                 </dependency>
             </dependencies>
+
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>project-defaults.yml</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+            </build>
         </profile>
     </profiles>
 
