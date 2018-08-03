@@ -1,2 +1,2 @@
 # architecture-poc
-An example of an decoupled java architecture, focused on domain.
+An example of a decoupled java architecture, focused on domain.
