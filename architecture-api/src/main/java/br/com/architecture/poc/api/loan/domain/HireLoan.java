@@ -37,6 +37,7 @@ public class HireLoan implements UseCase<HireLoan.Request, HireLoan.Response> {
 
 
     @Data
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class Request implements Serializable {
         private String ssn;

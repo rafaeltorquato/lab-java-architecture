@@ -22,22 +22,20 @@ public class GetHirerLoans implements
     @Override
     public List<Response> execute(Request request) throws LoanException {
         Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(request.hirerSsn));
-        failIfHirerDoesNotExist(hirer);
-        failIfHirerIsDead(hirer);
+        errorIfHirerDoesNotExist(hirer);
+        errorIfHirerIsDead(hirer);
 
         return loanRepository.loansOfHirer(hirer).stream()
                 .map(Response::new)
                 .collect(Collectors.toList());
     }
 
-    private void failIfHirerDoesNotExist(Hirer hirer) throws LoanException {
-        if (hirer == null)
-            throw new LoanException(ErrorMessage.HIRER_DOES_NOT_EXIST);
+    private void errorIfHirerDoesNotExist(Hirer hirer) throws LoanException {
+        if (hirer == null) throw new LoanException(ErrorMessage.HIRER_DOES_NOT_EXIST);
     }
 
-    private void failIfHirerIsDead(Hirer hirer) throws LoanException {
-        if (hirer.dead())
-            throw new LoanException(ErrorMessage.HIRER_IS_DEAD);
+    private void errorIfHirerIsDead(Hirer hirer) throws LoanException {
+        if (hirer.dead()) throw new LoanException(ErrorMessage.HIRER_IS_DEAD);
     }
 
     @Data
@@ -53,8 +51,8 @@ public class GetHirerLoans implements
         private Integer loanInstallmentQuantity;
 
         public Response(Loan l) {
-            currency = l.getMoneyValue().currency().toString();
             value = l.getMoneyValue().doubleValue();
+            currency = l.getMoneyValue().currency().toString();
             loanInstallmentQuantity = l.getLoanInstallment().intValue();
         }
     }
