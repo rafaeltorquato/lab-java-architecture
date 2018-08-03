@@ -20,29 +20,24 @@ public class HireLoan implements UseCase<HireLoan.Request, HireLoan.Response> {
     @Override
     public Response execute(Request req) throws LoanException {
         Hirer hirer = hirerRepository.bySocialSecurityNumber(new SSN(req.ssn));
-        erroSeContratanteInexistente(hirer);
+        errorIfHirerDoesNotExist(hirer);
 
-        Loan loan = new Loan(
-                new MoneyValue(req.value, Currency.valueOf(req.currency)),
-                new LoanInstallment(req.loanInstallment),
-                hirer
-        );
+        MoneyValue moneyValue = new MoneyValue(req.value, Currency.valueOf(req.currency));
+        LoanInstallment loanInstallment = new LoanInstallment(req.loanInstallment);
+        Loan loan = hirer.hireLoan(moneyValue, loanInstallment);
         loanRepository.store(loan);
 
-        return new Response(
-                loan.getIdentifier().toString()
-        );
+        return new Response(loan.getIdentifier().toString());
     }
 
-    private void erroSeContratanteInexistente(Hirer hirer) throws LoanException {
+    private void errorIfHirerDoesNotExist(Hirer hirer) throws LoanException {
         if (hirer == null)
             throw new LoanException(ErrorMessage.HIRER_DOES_NOT_EXIST);
     }
 
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
+    @Data
+    @AllArgsConstructor
     public static class Request implements Serializable {
         private String ssn;
         private Double value;
@@ -51,7 +46,7 @@ public class HireLoan implements UseCase<HireLoan.Request, HireLoan.Response> {
     }
 
     @Data
-    public class Response implements Serializable {
+    public static class Response implements Serializable {
         private final String identifier;
     }
 }

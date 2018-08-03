@@ -6,6 +6,7 @@ import java.util.Objects;
  * @author Rafael Torquato
  */
 public final class MoneyValue extends Number {
+
     private final Double value;
     private final Currency currency;
     private transient String toStringCache;

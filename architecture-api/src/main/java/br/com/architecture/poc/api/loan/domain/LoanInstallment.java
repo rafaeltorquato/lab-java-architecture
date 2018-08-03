@@ -7,8 +7,8 @@ public final class LoanInstallment extends Number {
     private final Integer quantity;
 
     public LoanInstallment(Integer quantity) {
-        this.quantity = quantity;
         if (quantity <= 0) throw new IllegalArgumentException("Quantity must be greater than 0.");
+        this.quantity = quantity;
     }
 
     @Override

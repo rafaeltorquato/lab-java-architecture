@@ -1,5 +1,6 @@
 package br.com.architecture.poc.api.loan.domain;
 
+import br.com.architecture.poc.api.common.MoneyValue;
 import br.com.architecture.poc.api.common.SSN;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,4 +37,12 @@ public class Hirer implements Serializable {
         return Optional.ofNullable(dateOfDeath);
     }
 
+    Loan hireLoan(MoneyValue moneyValue, LoanInstallment loanInstallment) throws LoanException {
+        errorIfIamDead();
+        return new Loan(moneyValue, loanInstallment, this);
+    }
+
+    private void errorIfIamDead() throws LoanException {
+        if(dead()) throw new LoanException(ErrorMessage.HIRER_IS_DEAD);
+    }
 }

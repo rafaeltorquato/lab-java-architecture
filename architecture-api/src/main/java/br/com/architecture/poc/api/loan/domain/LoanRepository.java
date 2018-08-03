@@ -7,6 +7,5 @@ import java.util.List;
  */
 public interface LoanRepository {
     void store(Loan loan);
-
     List<Loan> loansOfHirer(Hirer hirer);
 }
