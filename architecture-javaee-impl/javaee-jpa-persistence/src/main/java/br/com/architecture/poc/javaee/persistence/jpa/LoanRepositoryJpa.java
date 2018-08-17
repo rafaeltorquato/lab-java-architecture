@@ -29,8 +29,8 @@ public class LoanRepositoryJpa implements LoanRepository {
 
     @Override
     public List<Loan> loansOfHirer(Hirer hirer) {
-        List<LoanEntity> lista = em.createQuery("select e from EmprestimoEntity e where e.cpf = :cpf ")
-                .setParameter("cpf", hirer.getSsn().toString())
+        List<LoanEntity> lista = em.createQuery("select e from LoanEntity e where e.ssn = :ssn ")
+                .setParameter("ssn", hirer.getSsn().toString())
                 .getResultList();
         return lista.stream()
                 .map(e -> new Loan(
