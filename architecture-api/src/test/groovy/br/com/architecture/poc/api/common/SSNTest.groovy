@@ -1,15 +1,12 @@
 package br.com.architecture.poc.api.common
 
 import spock.lang.Specification
-import spock.lang.Unroll
 
 /**
  * @author Rafael Torquato
  */
 class SSNTest extends Specification {
 
-
-    @Unroll
     def "Should fail when create a SSN with eight characters"() {
         given:
         def cpfString = '12345678'
@@ -32,7 +29,7 @@ class SSNTest extends Specification {
         thrown(NullPointerException.class)
     }
 
-    def "should mask a SSN"() {
+    def "Should mask a SSN"() {
         given:
         def ssnString = '991982016'
 
