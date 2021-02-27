@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author Rafael Torquato
  */
 @RequiredArgsConstructor
-public class HireLoan implements UseCase<HireLoan.Request, HireLoan.Response> {
+public class HireLoanUseCase implements UseCase<HireLoanUseCase.Request, HireLoanUseCase.Response> {
 
     private final HirerRepository hirerRepository;
     private final LoanRepository loanRepository;

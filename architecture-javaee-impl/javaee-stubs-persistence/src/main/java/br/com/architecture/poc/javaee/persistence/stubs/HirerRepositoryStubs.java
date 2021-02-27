@@ -6,10 +6,12 @@ import br.com.architecture.poc.api.loan.domain.HirerRepository;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.swing.text.html.Option;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Rafael Torquato
@@ -41,7 +43,7 @@ public class HirerRepositoryStubs implements HirerRepository {
     }
 
     @Override
-    public Hirer bySocialSecurityNumber(SSN SSN) {
-        return hirerList.get(SSN);
+    public Optional<Hirer> bySocialSecurityNumber(SSN SSN) {
+        return Optional.ofNullable(hirerList.get(SSN));
     }
 }

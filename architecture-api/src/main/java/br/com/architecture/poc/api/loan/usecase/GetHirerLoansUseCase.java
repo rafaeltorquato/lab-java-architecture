@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
  * @author Rafael Torquato
  */
 @RequiredArgsConstructor
-public class GetHirerLoans implements
-        UseCase<GetHirerLoans.Request, List<GetHirerLoans.Response>> {
+public class GetHirerLoansUseCase implements
+        UseCase<GetHirerLoansUseCase.Request, List<GetHirerLoansUseCase.Response>> {
 
     private final LoanRepository loanRepository;
     private final HirerRepository hirerRepository;

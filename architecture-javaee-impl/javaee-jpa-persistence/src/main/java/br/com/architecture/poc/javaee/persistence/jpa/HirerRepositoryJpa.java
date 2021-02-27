@@ -7,7 +7,9 @@ import br.com.architecture.poc.api.loan.domain.HirerRepository;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 /**
  * @author Rafael Torquato
@@ -19,16 +21,19 @@ public class HirerRepositoryJpa implements HirerRepository {
     private EntityManager em;
 
     @Override
-    public Hirer bySocialSecurityNumber(SSN ssn) {
-        HirerEntity entity = em.find(HirerEntity.class, ssn.toString());
+    public Optional<Hirer> bySocialSecurityNumber(SSN ssn) {
         Hirer hirer = null;
-        if (entity != null) {
-            hirer = new Hirer(
-                    ssn,
-                    entity.getBirthDate()
-            );
-            hirer.setDateOfDeath(entity.getDateOfDeath());
+        try {
+            HirerEntity entity = em.find(HirerEntity.class, ssn.toString());
+            if (entity != null) {
+                hirer = new Hirer(
+                        ssn,
+                        entity.getBirthDate()
+                );
+                hirer.setDateOfDeath(entity.getDateOfDeath());
+            }
+        } catch (NoResultException ignored) {
         }
-        return hirer;
+        return Optional.ofNullable(hirer);
     }
 }

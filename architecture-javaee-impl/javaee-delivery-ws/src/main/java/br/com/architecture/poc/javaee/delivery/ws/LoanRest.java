@@ -2,6 +2,7 @@ package br.com.architecture.poc.javaee.delivery.ws;
 
 
 import br.com.architecture.poc.api.loan.domain.*;
+import br.com.architecture.poc.api.loan.usecase.*;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -24,8 +25,8 @@ public class LoanRest {
     private HirerRepository hirerRepository;
 
     @POST
-    public Response hire(HireLoan.Request request) {
-        HireLoan useCase = new HireLoan(hirerRepository, loanRepository);
+    public Response hire(HireLoanUseCase.Request request) {
+        HireLoanUseCase useCase = new HireLoanUseCase(hirerRepository, loanRepository);
         try {
             return Response.ok(useCase.execute(request)).build();
         } catch (LoanException e) {
@@ -36,8 +37,8 @@ public class LoanRest {
     @GET
     @Path("/hirer/{ssn}")
     public Response loansOfHirer(@PathParam("ssn") String ssn) {
-        GetHirerLoans useCase = new GetHirerLoans(loanRepository, hirerRepository);
-        GetHirerLoans.Request request = new GetHirerLoans.Request(ssn);
+        GetHirerLoansUseCase useCase = new GetHirerLoansUseCase(loanRepository, hirerRepository);
+        GetHirerLoansUseCase.Request request = new GetHirerLoansUseCase.Request(ssn);
         try {
             return Response.ok(useCase.execute(request)).build();
         } catch (LoanException e) {
