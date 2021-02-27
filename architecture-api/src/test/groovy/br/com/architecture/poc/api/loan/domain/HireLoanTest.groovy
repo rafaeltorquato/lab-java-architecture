@@ -1,6 +1,8 @@
 package br.com.architecture.poc.api.loan.domain
 
 import br.com.architecture.poc.api.common.Currency
+import br.com.architecture.poc.api.common.SSN
+import br.com.architecture.poc.api.loan.usecase.HireLoan
 import spock.lang.Specification
 
 /**
@@ -11,10 +13,7 @@ class HireLoanTest extends Specification {
     def "Should fail because hirer does not exist"() {
         given:
         def hirerRepository = Mock(HirerRepository)
-        hirerRepository.bySocialSecurityNumber(_) >> { null }
-
-        def loanRepository = Mock(LoanRepository)
-        loanRepository.store(_) >> {}
+        hirerRepository.bySocialSecurityNumber(_ as SSN) >> { Optional.empty() }
 
         def request = new HireLoan.Request()
         request.ssn = "919872016"
@@ -24,7 +23,7 @@ class HireLoanTest extends Specification {
 
         def useCase = new HireLoan(
                 hirerRepository,
-                loanRepository
+                Mock(LoanRepository)
         )
         when:
         useCase.execute(request)
@@ -32,8 +31,6 @@ class HireLoanTest extends Specification {
         then:
         def e = thrown(LoanException.class)
         e.errorMessage == ErrorMessage.HIRER_DOES_NOT_EXIST
-        1 * hirerRepository.bySocialSecurityNumber(_)
-        0 * loanRepository.store(_)
     }
 
 }

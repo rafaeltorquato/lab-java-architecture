@@ -37,7 +37,7 @@ public class Hirer implements Serializable {
         return Optional.ofNullable(dateOfDeath);
     }
 
-    Loan hireLoan(MoneyValue moneyValue, LoanInstallment loanInstallment) throws LoanException {
+    public Loan hireLoan(MoneyValue moneyValue, LoanInstallment loanInstallment) throws LoanException {
         errorIfIamDead();
         return new Loan(moneyValue, loanInstallment, this);
     }
